@@ -41,11 +41,11 @@
     export default {
         computed:{
             books(){
-                return this.$store.getters.getBooks;
+                return this.$store.getters['book/getBooks'];
             }
         },
         created() {
-            this.$store.dispatch('loadBooks')
+            this.$store.dispatch('book/loadBooks')
         },
         methods: {
             deleteBook(id) {

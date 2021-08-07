@@ -12,7 +12,10 @@
                         <label>Author</label>
                         <input type="text" class="form-control" v-model="book.author">
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Book</button>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Add Book</button>
+                        <router-link to="/" class="btn btn-danger">Back</router-link>
+                    </div>
                 </form>
             </div>
         </div>
