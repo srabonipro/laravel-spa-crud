@@ -1975,32 +1975,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      books: []
-    };
+  computed: {
+    books: function books() {
+      return this.$store.getters.getBooks;
+    }
   },
   created: function created() {
-    var _this = this;
-
-    // console.log(this.$store.state.message);
-    // console.log(this.$store.getters.getMessage);
-    this.axios.get('api/books').then(function (response) {
-      _this.books = response.data;
-    });
+    this.$store.dispatch('loadBooks');
   },
   methods: {
     deleteBook: function deleteBook(id) {
-      var _this2 = this;
+      var _this = this;
 
       if (confirm("Do you really want to delete?")) {
         this.axios["delete"]("api/book/delete/".concat(id)).then(function (response) {
-          var i = _this2.books.map(function (item) {
+          var i = _this.books.map(function (item) {
             return item.id;
           }).indexOf(id); // find index of your object
 
 
-          _this2.books.splice(i, 1);
+          _this.books.splice(i, 1);
         });
       }
     }
@@ -2206,16 +2200,25 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vuex__WEBPACK_IMPORTED_MODULE_1__.default);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
   state: {
-    message: "Hi, I am coming from the state that is why you can find me in every component with passing props"
+    books: []
   },
   getters: {
-    getMessage: function getMessage(state) {
-      return state.message;
+    getBooks: function getBooks(state) {
+      return state.books;
     }
   },
-  mutations: {// put sychronous functions for changing state e.g. add, edit, delete
+  mutations: {
+    SET_BOOKS: function SET_BOOKS(state, data) {
+      state.books = data;
+    }
   },
-  actions: {// put sychronous functions for changing state e.g. add, edit, delete
+  actions: {
+    loadBooks: function loadBooks(_ref) {
+      var commit = _ref.commit;
+      axios.get('api/books').then(function (response) {
+        commit('SET_BOOKS', response.data);
+      });
+    }
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);

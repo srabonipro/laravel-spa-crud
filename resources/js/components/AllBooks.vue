@@ -35,20 +35,13 @@
 
 <script>
     export default {
-        data() {
-            return {
-                books: []
+        computed:{
+            books(){
+                return this.$store.getters.getBooks;
             }
         },
         created() {
-            // console.log(this.$store.state.message);
-            // console.log(this.$store.getters.getMessage);
-            this.axios
-                .get('api/books')
-                .then(response => {
-                    this.books = response.data;
-                });
-
+            this.$store.dispatch('loadBooks')
         },
         methods: {
             deleteBook(id) {
