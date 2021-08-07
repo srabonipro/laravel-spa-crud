@@ -41,17 +41,20 @@
             }
         },
         created() {
+            // console.log(this.$store.state.message);
+            // console.log(this.$store.getters.getMessage);
             this.axios
-                .get('http://localhost:8000/api/books')
+                .get('api/books')
                 .then(response => {
                     this.books = response.data;
                 });
+
         },
         methods: {
             deleteBook(id) {
                 if(confirm("Do you really want to delete?")){
                 this.axios
-                    .delete(`http://localhost:8000/api/book/delete/${id}`)
+                    .delete(`api/book/delete/${id}`)
                     .then(response => {
                         let i = this.books.map(item => item.id).indexOf(id); // find index of your object
                         this.books.splice(i, 1)
