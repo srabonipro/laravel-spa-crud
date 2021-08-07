@@ -1,6 +1,10 @@
 <template>
     <div>
         <h3 class="text-center">All Books</h3><br/>
+        <div class="text-right mb-2">
+            <router-link to="/add" class="btn btn-success">Add Book</router-link>
+        </div>
+
 
         <table class="table table-bordered">
             <thead>

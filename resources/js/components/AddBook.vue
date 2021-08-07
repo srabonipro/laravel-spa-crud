@@ -28,15 +28,12 @@
         },
         methods: {
             addBook() {
-
-                this.axios
-                    .post('http://localhost:8000/api/book/add', this.book)
-                    .then(response => (
-                        this.$router.push({name: 'home'})
-                        // console.log(response.data)
-                    ))
-                    .catch(error => console.log(error))
-                    .finally(() => this.loading = false)
+                this.axios.post('/api/book/add', this.book).then(response => (
+                    this.$router.push({name: 'home'})
+                    // console.log(response.data)
+                ))
+                .catch(error => console.log(error))
+                .finally(() => this.loading = false)
             }
         }
     }

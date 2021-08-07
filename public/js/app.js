@@ -1912,7 +1912,7 @@ __webpack_require__.r(__webpack_exports__);
     addBook: function addBook() {
       var _this = this;
 
-      this.axios.post('http://localhost:8000/api/book/add', this.book).then(function (response) {
+      this.axios.post('/api/book/add', this.book).then(function (response) {
         return _this.$router.push({
           name: 'home'
         }) // console.log(response.data)
@@ -1939,6 +1939,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -2039,15 +2043,15 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.axios.get("http://localhost:8000/api/book/edit/".concat(this.$route.params.id)).then(function (response) {
-      _this.book = response.data; // console.log(response.data);
+    this.axios.get("/api/book/edit/".concat(this.$route.params.id)).then(function (response) {
+      _this.book = response.data;
     });
   },
   methods: {
     updateBook: function updateBook() {
       var _this2 = this;
 
-      this.axios.post("http://localhost:8000/api/book/update/".concat(this.$route.params.id), this.book).then(function (response) {
+      this.axios.post("/api/book/update/".concat(this.$route.params.id), this.book).then(function (response) {
         _this2.$router.push({
           name: 'home'
         });
@@ -37941,12 +37945,6 @@ var render = function() {
                 "router-link",
                 { staticClass: "nav-item nav-link", attrs: { to: "/" } },
                 [_vm._v("Home")]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                { staticClass: "nav-item nav-link", attrs: { to: "/add" } },
-                [_vm._v("Add Book")]
               )
             ],
             1
@@ -38106,6 +38104,19 @@ var render = function() {
   return _c("div", [
     _c("h3", { staticClass: "text-center" }, [_vm._v("All Books")]),
     _c("br"),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "text-right mb-2" },
+      [
+        _c(
+          "router-link",
+          { staticClass: "btn btn-success", attrs: { to: "/add" } },
+          [_vm._v("Add Book")]
+        )
+      ],
+      1
+    ),
     _vm._v(" "),
     _c("table", { staticClass: "table table-bordered" }, [
       _vm._m(0),
