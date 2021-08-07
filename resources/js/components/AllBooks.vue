@@ -46,11 +46,8 @@
         methods: {
             deleteBook(id) {
                 if(confirm("Do you really want to delete?")){
-                this.axios
-                    .delete(`api/book/delete/${id}`)
-                    .then(response => {
-                        let i = this.books.map(item => item.id).indexOf(id); // find index of your object
-                        this.books.splice(i, 1)
+                    axios.delete(`api/book/delete/${id}`).then(response => {
+                        this.$store.commit('DELETE_BOOK',id)
                     });
                 }
             }

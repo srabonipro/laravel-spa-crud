@@ -1988,13 +1988,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (confirm("Do you really want to delete?")) {
-        this.axios["delete"]("api/book/delete/".concat(id)).then(function (response) {
-          var i = _this.books.map(function (item) {
-            return item.id;
-          }).indexOf(id); // find index of your object
-
-
-          _this.books.splice(i, 1);
+        axios["delete"]("api/book/delete/".concat(id)).then(function (response) {
+          _this.$store.commit('DELETE_BOOK', id);
         });
       }
     }
@@ -2210,6 +2205,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
   mutations: {
     SET_BOOKS: function SET_BOOKS(state, data) {
       state.books = data;
+    },
+    DELETE_BOOK: function DELETE_BOOK(state, bookId) {
+      var index = state.books.findIndex(function (c) {
+        return c.id === bookId;
+      });
+      state.books.splice(index, 1);
     }
   },
   actions: {

@@ -15,6 +15,10 @@ const store = new Vuex.Store({
     mutations: {
         SET_BOOKS(state,data){
             state.books = data
+        },
+        DELETE_BOOK(state,bookId){
+            const index = state.books.findIndex(c => c.id === bookId)
+            state.books.splice(index, 1)
         }
     },
     actions: {
