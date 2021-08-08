@@ -2,7 +2,7 @@
     <div>
         <h1>All Categories</h1>
         <div>
-            <router-link to="/category/add" class="btn btn-success">Add Book</router-link>
+            <router-link to="/category/add" class="btn btn-success">Add Category</router-link>
         </div>
 
         <table class="table table-bordered">
@@ -25,7 +25,7 @@
                     <div class="btn-group" role="group">
                         <router-link :to="{name: 'edit', params: { id: category.id }}" class="btn btn-primary">Edit
                         </router-link>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger" @click="deleteCategory(category.id)">Delete</button>
                     </div>
                 </td>
             </tr>
@@ -45,6 +45,14 @@
         created() {
             this.$store.dispatch('category/loadCategories')
         },
+        methods: {
+            deleteCategory(id) {
+                if(confirm("Do you really want to delete?")){
+                    axios.delete(`/api/categories/${id}`).then(response => {
+                        this.$store.commit('category/DELETE_CATEGORY',id)
+                    });
+                }
+            }
+        }
     }
-//  @click="deleteCategory(category.id)"
 </script>

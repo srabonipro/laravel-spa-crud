@@ -21,6 +21,10 @@ class CategoryController extends Controller
             'name' => 'required|unique:categories,name',
         ]);
 
+        // $category = Category::create([
+        //     'name' => $request->name
+        // ]);
+
         $category = Category::create($request->all());
 
         if ($category) {
@@ -33,13 +37,12 @@ class CategoryController extends Controller
     // show category
     public function show($category)
     {
-        //
+        return response()->json($category);
     }
 
     // edit category
     public function edit($category)
     {
-        return response()->json($category);
     }
 
     // update category

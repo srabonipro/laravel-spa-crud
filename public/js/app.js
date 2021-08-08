@@ -2032,8 +2032,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (confirm("Do you really want to delete?")) {
-        axios["delete"]("api/book/delete/".concat(id)).then(function (response) {
-          _this.$store.commit('DELETE_BOOK', id);
+        axios["delete"]("api/books/".concat(id)).then(function (response) {
+          _this.$store.commit('book/DELETE_BOOK', id);
         });
       }
     }
@@ -2242,8 +2242,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.$store.dispatch('category/loadCategories');
+  },
+  methods: {
+    deleteCategory: function deleteCategory(id) {
+      var _this = this;
+
+      if (confirm("Do you really want to delete?")) {
+        axios["delete"]("/api/categories/".concat(id)).then(function (response) {
+          _this.$store.commit('category/DELETE_CATEGORY', id);
+        });
+      }
+    }
   }
-}); //  @click="deleteCategory(category.id)"
+});
 
 /***/ }),
 
@@ -2481,6 +2492,12 @@ __webpack_require__.r(__webpack_exports__);
   mutations: {
     SET_CATEGORIES: function SET_CATEGORIES(state, data) {
       state.categories = data;
+    },
+    DELETE_CATEGORY: function DELETE_CATEGORY(state, categoryId) {
+      var index = state.categories.findIndex(function (c) {
+        return c.id === categoryId;
+      });
+      state.categories.splice(index, 1);
     }
   },
   actions: {
@@ -39720,7 +39737,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-success", attrs: { to: "/category/add" } },
-          [_vm._v("Add Book")]
+          [_vm._v("Add Category")]
         )
       ],
       1
@@ -39757,9 +39774,18 @@ var render = function() {
                     [_vm._v("Edit\n                    ")]
                   ),
                   _vm._v(" "),
-                  _c("button", { staticClass: "btn btn-danger" }, [
-                    _vm._v("Delete")
-                  ])
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteCategory(category.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Delete")]
+                  )
                 ],
                 1
               )

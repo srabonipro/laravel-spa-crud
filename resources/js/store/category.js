@@ -15,6 +15,10 @@ export default({
         SET_CATEGORIES(state,data){
             state.categories = data
         },
+        DELETE_CATEGORY(state,categoryId){
+            const index = state.categories.findIndex(c => c.id === categoryId)
+            state.categories.splice(index, 1)
+        }
     },
     actions: {
         loadCategories({commit}){
