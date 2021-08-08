@@ -10,44 +10,67 @@ class BookController extends Controller
     // all books
     public function index()
     {
-        $books = Book::all()->toArray();
-        return array_reverse($books);
+        $books = Book::all();
+        return response()->json($books);
     }
 
     // add book
-    public function add(Request $request)
+    public function store(Request $request)
     {
-        $book = new Book([
-            'name' => $request->input('name'),
-            'author' => $request->input('author')
+        $request->validate([
+            'name' => 'required|unique:books,name',
+            'author' => 'required'
         ]);
-        $book->save();
 
-        return response()->json('The book successfully added');
+        $book = Book::create($request->all());
+
+        if ($book) {
+            return response()->json('The book successfully added');
+        } else {
+            return response()->json('Something went wrong!!');
+        }
+    }
+
+    // show book
+    public function show($book)
+    {
+        //
     }
 
     // edit book
-    public function edit($id)
+    public function edit($book)
     {
-        $book = Book::find($id);
         return response()->json($book);
     }
 
     // update book
-    public function update($id, Request $request)
+    public function update(Request $request, Book $book)
     {
-        $book = Book::find($id);
-        $book->update($request->all());
+        $request->validate([
+            'name' => 'required|unique:books,name,{$this->book->id}',
+            'author' => 'required'
+        ]);
 
-        return response()->json('The book successfully updated');
+        $book->name = $request->name;
+        $book->author = $request->author;
+        $updated = $book->update();
+
+        if ($updated) {
+            return response()->json('The book successfully updated');
+        } else {
+            return response()->json('Something went wrong!!');
+        }
     }
 
     // delete book
-    public function delete($id)
+    public function destroy(Book $book)
     {
-        $book = Book::find($id);
-        $book->delete();
+        $deleted = $book->delete();
 
-        return response()->json('The book successfully deleted');
+        if ($deleted) {
+            return response()->json('The book successfully deleted');
+        } else {
+            return response()->json('Something went wrong!!');
+        }
     }
 }

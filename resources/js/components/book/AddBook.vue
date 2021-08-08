@@ -30,13 +30,14 @@
             }
         },
         methods: {
-            addBook() {
-                this.axios.post('/api/book/add', this.book).then(response => (
-                    this.$router.push({name: 'home'})
-                    // console.log(response.data)
-                ))
-                .catch(error => console.log(error))
-                .finally(() => this.loading = false)
+            async addBook() {
+                try{
+                   const response = await this.form.post('/api/book/add', this.book)
+                    console.log(response)
+                    // this.$router.push({name: 'home'})
+                }catch(error){
+                    console.log(e);
+                }
             }
         }
     }
