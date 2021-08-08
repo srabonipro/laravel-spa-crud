@@ -6,7 +6,7 @@
                 <form @submit.prevent="addCategory">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name" v-model="category.name">
+                        <input type="text" class="form-control" v-model="category.name">
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">Add Category</button>
@@ -26,12 +26,16 @@
             }
         },
         methods:{
-            addCategory(){
-                this.axios.post('/api/category/add').then(response => (
-                    this.$router.push({name: 'category'})
-                ))
-                .catch(error => console.log(error))
-                .finally(() => this.loading = false)
+            async addCategory() {
+                try{
+                    // console.log(this.category);
+                   const response = await axios.post('/api/categories', this.category)
+                    this.category='';
+                    console.log(response);
+
+                }catch(error){
+                    console.log(error);
+                }
             }
         }
     }

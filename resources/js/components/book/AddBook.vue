@@ -33,7 +33,7 @@
             async addBook() {
                 try{
                     // console.log(this.book.author, this.book.name);
-                   const response = await axios.post('api/books', this.book)
+                   const response = await axios.post('/api/books', this.book)
                     this.book='';
                     console.log(response)
                     // this.$router.push({name: 'home'})
