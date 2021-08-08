@@ -32,13 +32,7 @@ class BookController extends Controller
     }
 
     // show book
-    public function show($book)
-    {
-        //
-    }
-
-    // edit book
-    public function edit($book)
+    public function show(Book $book)
     {
         return response()->json($book);
     }

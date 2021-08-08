@@ -21,7 +21,7 @@ export const routes = [
     },
     {
         name: 'edit',
-        path: '/edit/:id',
+        path: '/books/:id/edit',
         component: EditBook
     },
     {
@@ -36,7 +36,7 @@ export const routes = [
     },
     {
         name: 'category-edit',
-        path: '/category/edit/:id',
+        path: '/category/:id/edit',
         component: EditCategory
     },
 ];

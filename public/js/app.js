@@ -2083,18 +2083,13 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.axios.get("/api/book/edit/".concat(this.$route.params.id)).then(function (response) {
+    axios.get("/api/books/".concat(this.$route.params.id)).then(function (response) {
       _this.book = response.data;
     });
   },
   methods: {
     updateBook: function updateBook() {
-      var _this2 = this;
-
-      this.axios.post("/api/book/update/".concat(this.$route.params.id), this.book).then(function (response) {
-        _this2.$router.push({
-          name: 'home'
-        });
+      axios.put("/api/books/".concat(this.$route.params.id), this.book).then(function (response) {// this.$router.push({name: 'home'});
       });
     }
   }
@@ -2400,7 +2395,7 @@ var routes = [{
   component: _components_book_AddBook_vue__WEBPACK_IMPORTED_MODULE_1__.default
 }, {
   name: 'edit',
-  path: '/edit/:id',
+  path: '/books/:id/edit',
   component: _components_book_EditBook_vue__WEBPACK_IMPORTED_MODULE_2__.default
 }, {
   name: 'category',
@@ -2412,7 +2407,7 @@ var routes = [{
   component: _components_category_AddCategory_vue__WEBPACK_IMPORTED_MODULE_4__.default
 }, {
   name: 'category-edit',
-  path: '/category/edit/:id',
+  path: '/category/:id/edit',
   component: _components_category_EditCategory_vue__WEBPACK_IMPORTED_MODULE_5__.default
 }];
 

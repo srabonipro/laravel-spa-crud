@@ -27,19 +27,15 @@
             }
         },
         created() {
-            this.axios
-                .get(`/api/book/edit/${this.$route.params.id}`)
-                .then((response) => {
-                    this.book = response.data;
-                });
+            axios.get(`/api/books/${this.$route.params.id}`).then((response) => {
+                this.book = response.data;
+            });
         },
         methods: {
             updateBook() {
-                this.axios
-                    .post(`/api/book/update/${this.$route.params.id}`, this.book)
-                    .then((response) => {
-                        this.$router.push({name: 'home'});
-                    });
+                axios.put(`/api/books/${this.$route.params.id}`, this.book).then((response) => {
+                    // this.$router.push({name: 'home'});
+                });
             }
         }
     }
