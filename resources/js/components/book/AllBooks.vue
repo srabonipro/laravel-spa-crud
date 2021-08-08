@@ -50,8 +50,10 @@
         methods: {
             deleteBook(id) {
                 if(confirm("Do you really want to delete?")){
-                    axios.delete(`api/book/delete/${id}`).then(response => {
-                        this.$store.commit('DELETE_BOOK',id)
+                    axios.delete(`api/books/${id}`).then(response => {
+                        // this.$store.commit('DELETE_BOOK',id)
+                        console.log(response);
+
                     });
                 }
             }
