@@ -23,7 +23,7 @@
                 <td>{{ category.updated_at }}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <router-link :to="{name: 'edit', params: { id: category.id }}" class="btn btn-primary">Edit
+                        <router-link :to="{name: 'category-edit', params: { id: category.id }}" class="btn btn-primary">Edit
                         </router-link>
                         <button class="btn btn-danger" @click="deleteCategory(category.id)">Delete</button>
                     </div>

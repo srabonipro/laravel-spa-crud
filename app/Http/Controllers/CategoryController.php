@@ -35,14 +35,9 @@ class CategoryController extends Controller
     }
 
     // show category
-    public function show($category)
+    public function show(Category $category)
     {
         return response()->json($category);
-    }
-
-    // edit category
-    public function edit($category)
-    {
     }
 
     // update category
