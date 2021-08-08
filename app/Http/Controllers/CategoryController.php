@@ -7,46 +7,67 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    // all categories
+    // all category
     public function index()
     {
-        $categories = Category::all()->toArray();
-        return array_reverse($categories);
+        $category = Category::all();
+        return response()->json($category);
     }
 
     // add category
-    public function add(Request $request)
+    public function store(Request $request)
     {
-        $category = new Category([
-            'name' => $request->input('name')
+        $request->validate([
+            'name' => 'required|unique:categories,name',
         ]);
-        $category->save();
 
-        return response()->json('The category successfully added');
+        $category = Category::create($request->all());
+
+        if ($category) {
+            return response()->json('The category successfully added');
+        } else {
+            return response()->json('Something went wrong!!');
+        }
+    }
+
+    // show category
+    public function show($category)
+    {
+        //
     }
 
     // edit category
-    public function edit($id)
+    public function edit($category)
     {
-        $category = Category::find($id);
         return response()->json($category);
     }
 
     // update category
-    public function update($id, Request $request)
+    public function update(Request $request, Category $category)
     {
-        $category = Category::find($id);
-        $category->update($request->all());
+        $request->validate([
+            'name' => 'required|unique:categories,name,{$this->category->id}',
+        ]);
 
-        return response()->json('The category successfully updated');
+        $category->name = $request->name;
+        $updated = $category->update();
+
+        if ($updated) {
+            return response()->json('The category successfully updated');
+        } else {
+            return response()->json('Something went wrong!!');
+        }
     }
 
     // delete category
-    public function delete($id)
+    public function destroy(Category $category)
     {
-        $category = Category::find($id);
-        $category->delete();
+        $deleted = $category->delete();
 
-        return response()->json('The category successfully deleted');
+        if ($deleted) {
+            return response()->json('The category successfully deleted');
+        } else {
+            return response()->json('Something went wrong!!');
+        }
     }
 }

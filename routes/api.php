@@ -13,4 +13,4 @@ Route::middleware('auth:api')->get('user', function (Request $request) {
 Route::apiResource('books', BookController::class);
 
 // Category Routes
-Route::apiResource('categories', BookController::class);
+Route::apiResource('categories', CategoryController::class);
