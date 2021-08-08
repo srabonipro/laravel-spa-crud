@@ -4,15 +4,47 @@
         <div>
             <router-link to="/category/add" class="btn btn-success">Add Book</router-link>
         </div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="category in categories" :key="category.id">
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.created_at }}</td>
+                <td>{{ category.updated_at }}</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <router-link :to="{name: 'edit', params: { id: category.id }}" class="btn btn-primary">Edit
+                        </router-link>
+                        <button class="btn btn-danger">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
     </div>
 </template>
 
 <script>
     export default {
-
+        computed:{
+            categories(){
+                return this.$store.getters['category/getCategories'];
+            }
+        },
+        created() {
+            this.$store.dispatch('category/loadCategories')
+        },
     }
+//  @click="deleteCategory(category.id)"
 </script>
-
-<style lang="scss" scoped>
-
-</style>
