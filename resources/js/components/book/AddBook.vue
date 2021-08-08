@@ -32,11 +32,13 @@
         methods: {
             async addBook() {
                 try{
-                   const response = await this.form.post('/api/book/add', this.book)
+                    // console.log(this.book.author, this.book.name);
+                   const response = await axios.post('api/books', this.book)
+                    this.book='';
                     console.log(response)
                     // this.$router.push({name: 'home'})
                 }catch(error){
-                    console.log(e);
+                    console.log(error);
                 }
             }
         }
