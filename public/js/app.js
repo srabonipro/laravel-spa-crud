@@ -2052,13 +2052,23 @@ __webpack_require__.r(__webpack_exports__);
     deleteBook: function deleteBook(id) {
       var _this = this;
 
-      if (confirm("Do you really want to delete?")) {
-        axios["delete"]("api/books/".concat(id)).then(function (response) {
-          _this.$store.commit("book/DELETE_BOOK", id);
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios["delete"]("api/books/".concat(id)).then(function (response) {
+            _this.$store.commit("book/DELETE_BOOK", id);
 
-          _this.$toaster.success(response.data);
-        });
-      }
+            Swal.fire("Deleted!", "The book has been deleted.", "success");
+          });
+        }
+      });
     }
   }
 });
@@ -2339,13 +2349,24 @@ __webpack_require__.r(__webpack_exports__);
     deleteCategory: function deleteCategory(id) {
       var _this = this;
 
-      if (confirm("Do you really want to delete?")) {
-        axios["delete"]("/api/categories/".concat(id)).then(function (response) {
-          _this.$store.commit("category/DELETE_CATEGORY", id);
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios["delete"]("/api/categories/".concat(id)).then(function (response) {
+            _this.$store.commit("category/DELETE_CATEGORY", id); // this.$toaster.success(response.data);
 
-          _this.$toaster.success(response.data);
-        });
-      }
+
+            Swal.fire("Deleted!", "The category has been deleted.", "success");
+          });
+        }
+      });
     }
   }
 });
