@@ -41,7 +41,7 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $request->validate([
-            'name' => 'required|unique:books,name,{$this->book->id}',
+            'name' => 'required',
             'author' => 'required'
         ]);
 

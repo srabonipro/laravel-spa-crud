@@ -1922,10 +1922,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      book: {}
+      book: {},
+      errors: {}
     };
   },
   methods: {
@@ -1948,17 +1955,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.$toaster.success(response.data);
 
                 _this.book = "";
-                console.log(response); // this.$router.push({name: 'home'})
+                _this.errors = {}; // console.log(response);
+                // this.$router.push({name: 'home'})
 
-                _context.next = 12;
+                _context.next = 13;
                 break;
 
               case 9:
                 _context.prev = 9;
                 _context.t0 = _context["catch"](0);
+
+                if (_context.t0.response.status == 422) {
+                  _this.errors = _context.t0.response.data.errors;
+                }
+
                 console.log(_context.t0);
 
-              case 12:
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -2063,6 +2076,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2087,7 +2114,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      book: {}
+      book: {},
+      errors: {}
     };
   },
   created: function created() {
@@ -2101,10 +2129,42 @@ __webpack_require__.r(__webpack_exports__);
     updateBook: function updateBook() {
       var _this2 = this;
 
-      axios.put("/api/books/".concat(this.$route.params.id), this.book).then(function (response) {
-        // this.$router.push({name: 'home'});
-        _this2.$toaster.success(response.data);
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.put("/api/books/".concat(_this2.$route.params.id), _this2.book);
+
+              case 3:
+                response = _context.sent;
+
+                _this2.$toaster.success(response.data);
+
+                _this2.errors = {};
+                _context.next = 12;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+
+                if (_context.t0.response.status == 422) {
+                  _this2.errors = _context.t0.response.data.errors;
+                }
+
+                console.log(_context.t0);
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 8]]);
+      }))();
     }
   }
 });
@@ -2152,10 +2212,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      category: {}
+      category: {},
+      errors: {}
     };
   },
   methods: {
@@ -2178,16 +2242,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.$toaster.success(response.data);
 
                 _this.category = "";
-                console.log(response);
-                _context.next = 12;
+                _this.errors = {};
+                _context.next = 13;
                 break;
 
               case 9:
                 _context.prev = 9;
                 _context.t0 = _context["catch"](0);
+
+                if (_context.t0.response.status == 422) {
+                  _this.errors = _context.t0.response.data.errors;
+                }
+
                 console.log(_context.t0);
 
-              case 12:
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -2294,6 +2363,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
 //
 //
 //
@@ -2314,7 +2394,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      category: {}
+      category: {},
+      errors: {}
     };
   },
   created: function created() {
@@ -2328,10 +2409,42 @@ __webpack_require__.r(__webpack_exports__);
     updateCategory: function updateCategory() {
       var _this2 = this;
 
-      axios.put("/api/categories/".concat(this.$route.params.id), this.category).then(function (response) {
-        // this.$router.push({name: 'home'});
-        _this2.$toaster.success(response.data);
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.put("/api/categories/".concat(_this2.$route.params.id), _this2.category);
+
+              case 3:
+                response = _context.sent;
+
+                _this2.$toaster.success(response.data);
+
+                _this2.errors = {};
+                _context.next = 12;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+
+                if (_context.t0.response.status == 422) {
+                  _this2.errors = _context.t0.response.data.errors;
+                }
+
+                console.log(_context.t0);
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 8]]);
+      }))();
     }
   }
 });
@@ -39834,7 +39947,17 @@ var render = function() {
                     _vm.$set(_vm.book, "name", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errors && _vm.errors.name
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errors.name[0]) +
+                        "\n          "
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
@@ -39860,7 +39983,17 @@ var render = function() {
                     _vm.$set(_vm.book, "author", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errors && _vm.errors.author
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errors.author[0]) +
+                        "\n          "
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -40064,7 +40197,17 @@ var render = function() {
                     _vm.$set(_vm.book, "name", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errors && _vm.errors.name
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errors.name[0]) +
+                        "\n          "
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
@@ -40090,7 +40233,17 @@ var render = function() {
                     _vm.$set(_vm.book, "author", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errors && _vm.errors.author
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errors.author[0]) +
+                        "\n          "
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -40166,7 +40319,17 @@ var render = function() {
                     _vm.$set(_vm.category, "name", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errors && _vm.errors.name
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errors.name[0]) +
+                        "\n          "
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -40368,7 +40531,17 @@ var render = function() {
                     _vm.$set(_vm.category, "name", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errors && _vm.errors.name
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errors.name[0]) +
+                        "\n          "
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
