@@ -27,6 +27,11 @@
           <td>
             <div class="btn-group" role="group">
               <router-link
+                :to="{ name: 'show', params: { id: book.id } }"
+                class="btn btn-secondary"
+                >Show
+              </router-link>
+              <router-link
                 :to="{ name: 'edit', params: { id: book.id } }"
                 class="btn btn-primary"
                 >Edit

@@ -2,6 +2,7 @@
 import AllBooks from './components/book/AllBooks.vue';
 import AddBook from './components/book/AddBook.vue';
 import EditBook from './components/book/EditBook.vue';
+import ShowBook from './components/book/ShowBook.vue';
 
 // Category Component
 import AllCategory from './components/category/AllCategory.vue';
@@ -23,6 +24,11 @@ export const routes = [
         name: 'edit',
         path: '/books/:id/edit',
         component: EditBook
+    },
+    {
+        name: 'show',
+        path: '/books/:id/show',
+        component: ShowBook
     },
     {
         name: 'category',
