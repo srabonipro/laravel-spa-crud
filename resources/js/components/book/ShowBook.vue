@@ -41,13 +41,29 @@ export default {
   methods: {
     async pdf() {
       try {
-        const response = await axios.get("/api/books", this.book);
+        this.filedownloading = true;
+        axios({
+          url: "/api/books/pdf",
+          //   method: "POST",
+          responseType: "blob",
+        })
+          .then((response) => {
+            var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            var fileLink = document.createElement("a");
+            fileLink.href = fileURL;
+            fileLink.setAttribute("download", `example.pdf`);
+            document.body.appendChild(fileLink);
+            fileLink.click();
+            this.filedownloading = false;
+          })
+          .catch((error) => {
+            console.log(error);
+            this.filedownloading = false;
+          });
         console.log(response);
       } catch (error) {
         console.log(error);
       }
-
-      console.log("pdf button clicked");
     },
     csv() {
       console.log("csv button clicked");
