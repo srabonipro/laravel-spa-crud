@@ -9,7 +9,9 @@ class FileController extends Controller
 {
     public function createPdf()
     {
-        $pdf = PDF::loadView('my-pdf');
+        $books = Book::all();
+
+        $pdf = PDF::loadView('my-pdf', compact('books'));
         return $pdf->download('my-pdf');
     }
 }
