@@ -3,19 +3,16 @@
     <h1>Add Category</h1>
     <div class="row">
       <div class="col-md-6">
-        <form @submit.prevent="addCategory">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" v-model="category.name" />
-            <span class="text-danger" v-if="errors && errors.name">
-              {{ errors.name[0] }}
-            </span>
-          </div>
+        <form @submit.prevent="addCategory" @keydown="categoryForm.onKeydown($event)">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" v-model="categoryForm.name" name="name" class="form-control" :class="{ 'is-invalid':categoryForm.errors.has('name') }">
+                <div class="text-danger" v-if="categoryForm.errors.has('name')" v-html="categoryForm.errors.get('name')" />
+                <span>{{ categoryForm.errors[0] }}</span>
+            </div>
           <div>
             <button type="submit" class="btn btn-primary">Add Category</button>
-            <router-link to="/category" class="btn btn-danger"
-              >Back</router-link
-            >
+            <router-link to="/category" class="btn btn-danger">Back</router-link>
           </div>
         </form>
       </div>
@@ -24,27 +21,24 @@
 </template>
 
 <script>
+import Form from 'vform'
+
 export default {
-  data() {
-    return {
-      category: {},
-      errors: {},
-    };
-  },
+
+  data: () => ({
+    categoryForm: new Form({
+      name: '',
+    })
+  }),
+
   methods: {
     async addCategory() {
-      try {
-        // console.log(this.category);
-        const response = await axios.post("/api/categories", this.category);
-        this.$toaster.success(response.data);
-        this.category = "";
-        this.errors = {};
-      } catch (error) {
-        if (error.response.status == 422) {
-          this.errors = error.response.data.errors;
+        try {
+            const response = await axios.post("/api/categories", this.category);
+
+        } catch (error) {
+            console.log(error.response.data.errors.name[0])
         }
-        console.log(error);
-      }
     },
   },
 };

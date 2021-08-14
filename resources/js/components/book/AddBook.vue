@@ -3,25 +3,21 @@
     <h3 class="text-center">Add Book</h3>
     <div class="row">
       <div class="col-md-6">
-        <form @submit.prevent="addBook">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" v-model="book.name" />
-            <span class="text-danger" v-if="errors && errors.name">
-              {{ errors.name[0] }}
-            </span>
-          </div>
-          <div class="form-group">
-            <label>Author</label>
-            <input type="text" class="form-control" v-model="book.author" />
-            <span class="text-danger" v-if="errors && errors.author">
-              {{ errors.author[0] }}
-            </span>
-          </div>
-          <div>
-            <button type="submit" class="btn btn-primary">Add Book</button>
-            <router-link to="/" class="btn btn-danger">Back</router-link>
-          </div>
+        <form @submit.prevent="addBook" @keydown="bookForm.onKeydown($event)">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" v-model="bookForm.name" name="name" class="form-control" :class="{ 'is-invalid':bookForm.errors.has('name') }">
+                <div class="text-danger" v-if="bookForm.errors.has('name')" v-html="bookForm.errors.get('name')" />
+            </div>
+            <div class="form-group">
+                <label>Author Name</label>
+                <input type="text" v-model="bookForm.author" name="author" class="form-control" :class="{ 'is-invalid':bookForm.errors.has('author') }">
+                <div class="text-danger" v-if="bookForm.errors.has('author')" v-html="bookForm.errors.get('author')" />
+            </div>
+
+            <button type="submit" class="btn btn-primary"  :disabled="bookForm.busy">
+                Submit
+            </button>
         </form>
       </div>
     </div>
@@ -29,30 +25,22 @@
 </template>
 
 <script>
+import Form from 'vform'
+
 export default {
-  data() {
-    return {
-      book: {},
-      errors: {},
-    };
-  },
+  data: () => ({
+    bookForm: new Form({
+      name: '',
+      author: ''
+    })
+  }),
+
   methods: {
-    async addBook() {
-      try {
-        // console.log(this.book.author, this.book.name);
-        const response = await axios.post("/api/books", this.book);
-        this.$toaster.success(response.data);
-        this.book = "";
-        this.errors = {};
-        // console.log(response);
-        // this.$router.push({name: 'home'})
-      } catch (error) {
-        if (error.response.status == 422) {
-          this.errors = error.response.data.errors;
-        }
-        console.log(error);
-      }
-    },
-  },
-};
+    async addBook () {
+        const response = await this.bookForm.post('/api/books')
+        console.log(response)
+
+    }
+  }
+}
 </script>
