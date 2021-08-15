@@ -2267,11 +2267,83 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    csv: function csv() {
-      console.log("csv button clicked");
-    },
     excel: function excel() {
-      console.log("excel button clicked");
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                try {
+                  _this3.filedownloading = true;
+                  axios({
+                    url: "/api/books/excel",
+                    //   method: "POST",
+                    responseType: "blob"
+                  }).then(function (response) {
+                    var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                    var fileLink = document.createElement("a");
+                    fileLink.href = fileURL;
+                    fileLink.setAttribute("download", "example.xlsx");
+                    document.body.appendChild(fileLink);
+                    fileLink.click();
+                    _this3.filedownloading = false;
+                  })["catch"](function (error) {
+                    console.log(error);
+                    _this3.filedownloading = false;
+                  });
+                  console.log(response);
+                } catch (error) {
+                  console.log(error);
+                }
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    csv: function csv() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                try {
+                  _this4.filedownloading = true;
+                  axios({
+                    url: "/api/books/csv",
+                    //   method: "POST",
+                    responseType: "blob"
+                  }).then(function (response) {
+                    var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                    var fileLink = document.createElement("a");
+                    fileLink.href = fileURL;
+                    fileLink.setAttribute("download", "example.csv");
+                    document.body.appendChild(fileLink);
+                    fileLink.click();
+                    _this4.filedownloading = false;
+                  })["catch"](function (error) {
+                    console.log(error);
+                    _this4.filedownloading = false;
+                  });
+                  console.log(response);
+                } catch (error) {
+                  console.log(error);
+                }
+
+              case 1:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   }
 });

@@ -65,11 +65,61 @@ export default {
         console.log(error);
       }
     },
-    csv() {
-      console.log("csv button clicked");
+
+
+    async excel() {
+      try {
+        this.filedownloading = true;
+        axios({
+          url: "/api/books/excel",
+          //   method: "POST",
+          responseType: "blob",
+        })
+          .then((response) => {
+            var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            var fileLink = document.createElement("a");
+            fileLink.href = fileURL;
+            fileLink.setAttribute("download", `example.xlsx`);
+            document.body.appendChild(fileLink);
+            fileLink.click();
+            this.filedownloading = false;
+          })
+          .catch((error) => {
+            console.log(error);
+            this.filedownloading = false;
+          });
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     },
-    excel() {
-      console.log("excel button clicked");
+
+
+    async csv() {
+      try {
+        this.filedownloading = true;
+        axios({
+          url: "/api/books/csv",
+          //   method: "POST",
+          responseType: "blob",
+        })
+          .then((response) => {
+            var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            var fileLink = document.createElement("a");
+            fileLink.href = fileURL;
+            fileLink.setAttribute("download", `example.csv`);
+            document.body.appendChild(fileLink);
+            fileLink.click();
+            this.filedownloading = false;
+          })
+          .catch((error) => {
+            console.log(error);
+            this.filedownloading = false;
+          });
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
