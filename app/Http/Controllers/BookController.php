@@ -72,7 +72,9 @@ class BookController extends Controller
     public function search()
     {
         return Book::when(request('search'), function ($q) {
-            $q->where('name', 'like', '%' . request('search') . '%');
+            $q->where('name', 'like', '%' . request('search') . '%')
+                ->orWhere('author', 'like', '%' . request('search') . '%')
+                ->orWhere('created_at', 'like', '%' . request('search') . '%');
         })->orderBy('id', 'desc')->get();
     }
 }
