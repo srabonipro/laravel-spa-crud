@@ -9,6 +9,9 @@ import AllCategory from './components/category/AllCategory.vue';
 import AddCategory from './components/category/AddCategory.vue';
 import EditCategory from './components/category/EditCategory.vue';
 
+// Product Component
+import AddProduct from './components/product/AddProduct.vue';
+
 export const routes = [
     {
         name: 'home',
@@ -44,5 +47,10 @@ export const routes = [
         name: 'category-edit',
         path: '/category/:id/edit',
         component: EditCategory
+    },
+    {
+        name: 'product-add',
+        path: '/product/add',
+        component: AddProduct
     },
 ];

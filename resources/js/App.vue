@@ -9,6 +9,7 @@
                 <div class="navbar-nav">
                     <router-link to="/" class="nav-item nav-link">Books</router-link>
                     <router-link to="/category" class="nav-item nav-link">Categories</router-link>
+                    <router-link to="/product/add" class="nav-item nav-link">Products</router-link>
                 </div>
             </div>
         </nav>
@@ -16,7 +17,3 @@
         <router-view></router-view>
     </div>
 </template>
-
-<script>
-    export default {}
-</script>
