@@ -15,6 +15,13 @@
                 <div class="text-danger" v-if="bookForm.errors.has('author')" v-html="bookForm.errors.get('author')" />
             </div>
 
+            <!-- <div class="form-group">
+                <select v-for="category in categories" :key="category.id">
+                    <option>-Select Category-</option>
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                </select>
+            </div> -->
+
             <button type="submit" class="btn btn-primary"  :disabled="bookForm.busy">
                 Submit
             </button>
@@ -28,6 +35,7 @@
 import Form from 'vform'
 
 export default {
+
   data: () => ({
     bookForm: new Form({
       name: '',
@@ -41,6 +49,16 @@ export default {
         console.log(response)
 
     }
-  }
+  },
+
+
+  computed: {
+    categories() {
+      return this.$store.getters["category/getCategories"];
+    },
+  },
+  created() {
+    this.$store.dispatch("category/loadCategories");
+  },
 }
 </script>

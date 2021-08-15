@@ -34,7 +34,7 @@ export default {
   methods: {
     async addCategory() {
         try {
-            const response = await axios.post("/api/categories", this.category);
+            const response = await axios.post("/api/categories", this.categoryForm);
 
         } catch (error) {
             console.log(error.response.data.errors.name[0])

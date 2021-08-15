@@ -24,7 +24,8 @@ export default({
         loadCategories({commit}){
             axios.get('/api/categories')
             .then(response => {
-                commit('SET_CATEGORIES',response.data)
+                console.log(response)
+                // commit('SET_CATEGORIES',response.data)
             });
         },
     },

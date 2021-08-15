@@ -1925,6 +1925,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -1960,6 +1967,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     }
+  },
+  computed: {
+    categories: function categories() {
+      return this.$store.getters["category/getCategories"];
+    }
+  },
+  created: function created() {
+    this.$store.dispatch("category/loadCategories");
   }
 });
 
@@ -2433,7 +2448,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios.post("/api/categories", _this.category);
+                return axios.post("/api/categories", _this.categoryForm);
 
               case 3:
                 response = _context.sent;
@@ -2890,7 +2905,7 @@ __webpack_require__.r(__webpack_exports__);
     loadCategories: function loadCategories(_ref) {
       var commit = _ref.commit;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/categories').then(function (response) {
-        commit('SET_CATEGORIES', response.data);
+        console.log(response); // commit('SET_CATEGORIES',response.data)
       });
     }
   }
