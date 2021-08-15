@@ -10,13 +10,8 @@ class BookController extends Controller
     // all books
     public function index()
     {
-        // $books = Book::all();
-        // return response()->json($books);
-
-
-        return Book::when(request('search'), function ($q) {
-            $q->where('name', 'like', '%' . request('search') . '%');
-        })->orderBy('id', 'desc')->get();
+        $books = Book::all();
+        return response()->json($books);
     }
 
     // add book
