@@ -15,6 +15,9 @@ Route::get('/books/pdf', [FileController::class, 'createPdf']);
 Route::get('/books/excel', [FileController::class, 'createExcel']);
 Route::get('/books/csv', [FileController::class, 'createCsv']);
 
+// Search Routes
+Route::get('/books/search', [BookController::class, 'search']);
+
 // Book Routes
 Route::apiResource('books', BookController::class);
 

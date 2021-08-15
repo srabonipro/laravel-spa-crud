@@ -1976,6 +1976,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2025,7 +2027,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      search: ''
+    };
+  },
   computed: {
     books: function books() {
       return this.$store.getters["book/getBooks"];
@@ -2048,12 +2060,20 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]("api/books/".concat(id)).then(function (response) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default().delete("api/books/".concat(id)).then(function (response) {
             _this.$store.commit("book/DELETE_BOOK", id);
 
             Swal.fire("Deleted!", "The book has been deleted.", "success");
           });
         }
+      });
+    },
+    searchBook: function searchBook() {
+      var _this2 = this;
+
+      // axios.get(`/api/books/search?search=${this.search}`).then(response => console.log(response))
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/books/search?search=' + this.search).then(function (response) {
+        _this2.$store.commit('book/UPDATE_BOOKS', response.data);
       });
     }
   }
@@ -2814,6 +2834,9 @@ __webpack_require__.r(__webpack_exports__);
         return c.id === bookId;
       });
       state.books.splice(index, 1);
+    },
+    UPDATE_BOOKS: function UPDATE_BOOKS(state, data) {
+      state.books = data;
     }
   },
   actions: {
@@ -40306,8 +40329,46 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "text-right mb-2" },
+      { staticClass: "d-flex justify-content-between mb-2" },
       [
+        _c(
+          "form",
+          {
+            staticClass: "form-inline",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.searchBook.apply(null, arguments)
+              }
+            }
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search,
+                  expression: "search"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Search" },
+              domProps: { value: _vm.search },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.search = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(0)
+          ]
+        ),
+        _vm._v(" "),
         _c(
           "router-link",
           { staticClass: "btn btn-success", attrs: { to: "/add" } },
@@ -40318,7 +40379,7 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("table", { staticClass: "table table-bordered" }, [
-      _vm._m(0),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "tbody",
@@ -40381,6 +40442,16 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-info", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "fas fa-search" })]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

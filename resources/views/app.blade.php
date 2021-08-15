@@ -7,6 +7,7 @@
     <title>Laravel & Vue CRUD</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
     <style>
         .bg-light {

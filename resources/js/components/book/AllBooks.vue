@@ -2,7 +2,11 @@
   <div>
     <h3 class="text-center">All Books</h3>
     <br />
-    <div class="text-right mb-2">
+    <div class="d-flex justify-content-between mb-2">
+        <form @submit.prevent="searchBook" class="form-inline">
+            <input type="text" placeholder="Search" class="form-control" v-model="search">
+            <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
+        </form>
       <router-link to="/add" class="btn btn-success">Add Book</router-link>
     </div>
 
@@ -48,7 +52,13 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+  data(){
+      return {
+          search: '',
+      }
+  },
   computed: {
     books() {
       return this.$store.getters["book/getBooks"];
@@ -75,6 +85,11 @@ export default {
           });
         }
       });
+    },
+    searchBook(){
+        // axios.get(`/api/books/search?search=${this.search}`).then(response => console.log(response))
+        axios.get('/api/books/search?search='+ this.search).then((response) => {
+            this.$store.commit('book/UPDATE_BOOKS',response.data)})
     },
   },
 };
